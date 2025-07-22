@@ -23,9 +23,9 @@ async function loadProductData() {
 
             //load color
             loadSelect("color", json.colorList, "value");
-            
+
             //load qualtiy
-             loadSelect("condition", json.qualityList, "value");
+            loadSelect("condition", json.qualityList, "value");
 
 
         } else {
@@ -109,4 +109,23 @@ async function saveProuct() {
     );
 
 
+const popup = Notification();
+
+    if (response.ok) { // success
+        const json = await response.json();
+        if (json.status) {
+        } else {// when status false
+            if (json.message === "Please sign in!") {
+                window.location = "sing-in.html";
+            } else {
+                popup.error(
+                        {
+                            message: json.message
+                        }
+                );
+            }
+        }
+    } else {
+    }
 }
+
